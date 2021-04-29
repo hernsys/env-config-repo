@@ -1,0 +1,21 @@
+
+artifact: edu.nshs.mq:bpm-event-hub-publisher:jar:0.1
+
+spring.rabbitmq.listener.simple.prefetch: 30
+spring.rabbitmq.listener.direct.consumers-per-queue: 2
+
+consume.rabbitmq:
+  host: rbtmqhieqa01.northwell.edu
+  username: svc_aehr_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMQA001
+  queue_name: StartProcessAzureQueue
+  
+publish.eventHub:
+  connectionString: Endpoint=sb://bpmper-qa-ehns.servicebus.windows.net/;SharedAccessKeyName=send-sap;SharedAccessKey=vvDCQ3oYRQrjfaT0Ja78MrfmA999X13tqHyS9cUMA1A=
+  eventHubName: bpmperxml-qa-eh
+  nameSpaceName: bpmper-qa-ehns
+  sasKeyName: send-sap
+  sasKey: vvDCQ3oYRQrjfaT0Ja78MrfmA999X13tqHyS9cUMA1A=
+
+configuredPrograms: ListApp_GoHealth_Referrals_Process, ListApp_EDDischarge_FollowUp_Process, ListApp_DPX_Process, GapsInCare, ListApp_AEHR_Referrals

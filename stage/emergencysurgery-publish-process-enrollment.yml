@@ -1,0 +1,45 @@
+
+artifact: edu.nshs.mq:publish-process-enrollment:jar:0.2
+
+spring.rabbitmq.listener.simple.prefetch: 30
+
+server.port: 22004
+
+consume.rabbitmq:
+  host: rbtmqhiestage01.nslijhs.net
+  username: svc_aehr_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMSTAGE001
+  queue_name: EmergencySurgeryQueue
+  
+publish.rabbitmq:
+  host: rbtmqhiestage01.nslijhs.net
+  username: svc_aehr_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMSTAGE001
+  exchange_name: BPMExchange
+  routing_key: StartProcessJsonKey
+  
+process_enrollment:
+  process_id : ListApp_EmergencySurgery
+  keymap:
+    mrn : patient_MRN
+    mpiid : patient_MPIID
+    assigning_auth : patient_mrnAssigningAuthority
+    first_name : patient_firstName
+    last_name : patient_lastName
+    dob : patient_DOB
+    gender : patient_gender
+    home_phone : patient_phoneNumber1
+    cell_phone : patient_phoneNumber2
+    email : patient_email
+    encounter_number : clin_encounterNumberStrDT
+    surgery_location : clin_surgery_location
+    surgery_scheduled_date_time : clin_surgery_scheduledDateDT
+    pref_language : patient_preferredLanguage
+    physician_name : clin_surgeonFullNameStrDT
+    physician_phone : clin_surgeonContactNumberStrDT
+    physician_specialty : clin_surgeonSpecialtyStrDT
+
+
+   

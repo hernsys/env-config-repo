@@ -1,0 +1,41 @@
+
+artifact: edu.nshs.mq:patient-merge-a31:jar:0.3
+
+spring.rabbitmq.listener.simple.prefetch: 30
+
+server.port: 18004
+
+consume.rabbitmq:
+  host: rbtmqhiestage01.nslijhs.net
+  username: svc_bpm_ensemble_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: ENSEMBLESTAGE001
+  queue_name: PatientMergeA31
+  
+publish.rabbitmq:
+  host: rbtmqhiestage01.nslijhs.net
+  username: svc_aehr_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMSTAGE001
+  exchange_name: BPMExchange
+  routing_key: PatientMergeJsonKey
+  
+patient_merge:
+  process_dsl_template: "{\"bool\":{\"must\":[{\"term\":{\"variables.processId\": \"listapp_tdp_nhbr_process\"}},{\"term\":{\"variables.process_status\":\"active\"}},{\"term\":{\"variables.patient_MRN\": \"XXXMRNXXX\"}},{\"term\":{\"variables.patient_mrnAssigningAuthority\":\"XXXMRNAAXXX\"}}]}}"
+  task_keymap:
+    patient_EPIStrDT: "epi"
+    patient_firstName : "queueRequest.payload.eventQueuePayloadMessage.sda.container.patient.name.givenName"
+    patient_lastName : "queueRequest.payload.eventQueuePayloadMessage.sda.container.patient.name.familyName"
+    patient_fullName : "queueRequest.payload.eventQueuePayloadMessage.sda.container.patient.name.calculatedFullName"
+    patient_DOB : "queueRequest.payload.eventQueuePayloadMessage.sda.container.patient.birthTime.time"
+    patient_age : "queueRequest.payload.eventQueuePayloadMessage.sda.container.patient.calculatedAge"
+    patient_gender : "queueRequest.payload.eventQueuePayloadMessage.sda.container.patient.gender.code"
+  process_keymap:
+    patient_EPIStrDT: "epi"
+    patient_firstName : "queueRequest.payload.eventQueuePayloadMessage.sda.container.patient.name.givenName"
+    patient_lastName : "queueRequest.payload.eventQueuePayloadMessage.sda.container.patient.name.familyName"
+    patient_fullName : "queueRequest.payload.eventQueuePayloadMessage.sda.container.patient.name.calculatedFullName"
+    patient_DOB : "queueRequest.payload.eventQueuePayloadMessage.sda.container.patient.birthTime.time"
+    patient_age : "queueRequest.payload.eventQueuePayloadMessage.sda.container.patient.calculatedAge"
+    patient_gender : "queueRequest.payload.eventQueuePayloadMessage.sda.container.patient.gender.code"
+    

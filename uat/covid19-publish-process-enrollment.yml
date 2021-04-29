@@ -1,0 +1,52 @@
+
+artifact: edu.nshs.mq:publish-process-enrollment:jar:0.1
+
+server.port: 25001
+
+spring.rabbitmq.listener.simple.prefetch: 30
+
+consume.rabbitmq:
+  host: rbtmqhiedev01.northwell.edu
+  username: svc_aehr_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMDEV001
+  queue_name: COVID19Queue
+  
+publish.rabbitmq:
+  host: rbtmqhiedev01.northwell.edu
+  username: svc_aehr_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMDEV001
+  exchange_name: BPMExchange
+  routing_key: StartProcessJsonKey
+  
+process_enrollment:
+  process_id : ListApp_COVID19_Process
+  keymap:
+    patient_MPIID : patient_MPIID
+    patient_MRN : patient_MRN
+    patient_mrnAssigningAuthority : patient_mrnAssigningAuthority
+    clin_encounterNumberStrDT : clin_encounterNumberStrDT
+    clin_labTestNameStrDT : clin_labTestNameStrDT
+    clin_labTestResultStrDT : clin_labTestResultStrDT
+    clin_resultDateDT : clin_resultDateDT
+    clin_encounterTypeStrDT : clin_encounterTypeStrDT
+    patient_firstName : patient_firstName
+    patient_lastName : patient_lastName
+    patient_DOB : patient_DOB
+    patient_email : patient_email
+    patient_gender : patient_gender
+    patient_homePhone : patient_homePhone
+    patient_mobilePhone : patient_mobilePhone
+    patient_preferredLanguage : patient_preferredLanguage
+    patient_street : patient_street
+    patient_city : patient_city
+    patient_state : patient_state
+    patient_zip : patient_zip
+    patient_textConsentStrDT : patient_textConsentStrDT
+    patient_textOrEmailPreferredStrDT : patient_textOrEmailPreferredStrDT
+    patient_deceasedFlag : patient_deceasedFlag
+    clin_facilityStrDT : clin_facilityStrDT
+    clin_visitDateDT : clin_visitDateDT
+    clin_locationStrDT : clin_locationStrDT
+    clin_dischargeDispositionStrDT : clin_dischargeDispositionStrDT

@@ -1,0 +1,3 @@
+artifact: edu.nshs:location-service:jar:0.1
+
+server.port: 27003

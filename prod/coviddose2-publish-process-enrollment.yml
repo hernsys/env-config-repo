@@ -1,0 +1,48 @@
+
+artifact: edu.nshs.mq:publish-process-enrollment:jar:0.2
+
+spring.rabbitmq.listener.simple.prefetch: 30
+
+server.port: 21006
+
+consume.rabbitmq:
+  host: rbtmqhieprod01.nslijhs.net
+  username: svc_aehr_gastro_user
+  password: '{cipher}adb27e07ae1e5bc0d0e7b17fcc5448ebb83a2a393ccb14fd4e25421cdf6be671'
+  virtual-host: BPMPROD001
+  queue_name: CovidDose2Queue
+  
+publish.rabbitmq:
+  host: rbtmqhieprod01.nslijhs.net
+  username: svc_aehr_gastro_user
+  password: '{cipher}adb27e07ae1e5bc0d0e7b17fcc5448ebb83a2a393ccb14fd4e25421cdf6be671'
+  virtual-host: BPMPROD001
+  exchange_name: BPMExchange
+  routing_key: StartProcessJsonKey
+  
+process_enrollment:
+  process_id : ListApp_COVID19_VaccineDoseTwo_Process
+  keymap:
+    AppointmentId : clin_appointmentIdStrDT
+    Dose1AdminDate : clin_doseOneAdministeredDateDT
+    Dose1County : clin_doseOneCountyStrDT
+    Dose1Location : clin_doseOneLocationStrDT
+    VaccineManufacturer : clin_vaccineManufacturerStrDT
+    PatientId : patient_id
+    PatientFirstName : patient_firstName
+    PatientLastName : patient_lastName
+    PatientDOB : patient_DOBDateDT
+    PatientLegalGender : patient_gender
+    PatientPhone : patient_homePhone
+    PatientCellularPhone : patient_mobilePhone
+    PatientEmailAddress : patient_email
+    PatientPreferredLanguage : patient_preferredLanguage
+    CreatedDate : clin_createdDateDT
+    PatientFullName : patient_fullName
+    ScheduleType : clin_scheduleTypeStrDT
+    MiscellaneousInfo : clin_miscellaneousInfoStrDT
+    PatientAddress : patient_street
+    PatientCity : patient_city
+    PatientState : patient_state
+    PatientZip : patient_zip
+    IsEmployee : clin_isEmployeeBoolDT

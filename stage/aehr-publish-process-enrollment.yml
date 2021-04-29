@@ -1,0 +1,53 @@
+
+artifact: edu.nshs.mq:publish-process-enrollment:jar:0.2
+spring.rabbitmq.listener.simple.prefetch: 30
+
+server.port: 21004
+
+consume.rabbitmq:
+  host: rbtmqhiestage01.nslijhs.net
+  username: svc_aehr_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMSTAGE001
+  queue_name: AEHRQueue
+  
+publish.rabbitmq:
+  host: rbtmqhiestage01.nslijhs.net
+  username: svc_aehr_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMSTAGE001
+  exchange_name: BPMExchange
+  routing_key: StartProcessJsonKey
+  
+process_enrollment:
+  process_id : ListApp_AEHR_Referrals
+  keymap:
+    patient_mrn : patient_MRN
+    patient_epi : patient_EPI
+    patient_name : patient_fullNameStrDT
+    patient_dob : patient_DOB
+    patient_gender : patient_gender
+    zipcode : patient_zip
+    phone_number : patient_homePhone
+    insurance : patient_insurancePrimaryStrDT
+    location_name : referral_locationNameStrDT
+    appt_department_name : referral_apptDepartmentNameStrDT
+    appointment_type : referral_appointmentTypeStrDT
+    billing_provider_name : referral_billingProviderNameStrDT
+    billing_npi : referral_billingNpiStrDT
+    performing_provider_name : referral_perfProviderNameStrDT
+    performing_npi : referral_performingNpiStrDT
+    ordering_md : referral_ordering_MDStrDT
+    ordering_npi : referral_ordering_NPIStrDT
+    specialty_name : referral_specialityNameStrDT
+    order_name : referral_orderNameStrDT
+    order_number : referral_orderNumberStrDT
+    order_type_name : referral_orderTypeNameStrDT
+    order_status : referral_orderStatusStrDT
+    date_ordered : referral_dateOrderedDateDT
+    to_be_done_dttm : referral_ToBeDoneDttmStrDT
+    over_due_dttm : referral_DueDttmStrDT
+    priority : referral_priorityStrDT
+    problem : referral_problemStrDT
+    performing_location : referral_PerformingLocationStrDT
+    recipient : referral_recipientStrDT

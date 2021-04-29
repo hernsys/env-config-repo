@@ -1,0 +1,47 @@
+artifact: edu.nshs.mq:publish-process-enrollment:jar:0.2
+
+spring.rabbitmq.listener.simple.prefetch: 30
+
+server.port: 24002
+
+consume.rabbitmq:
+  host: rbtmqhieidev01.northwell.edu
+  username: svc_gicsi_user
+  password: '{cipher}0365b87fd7937f815766831fcc97ac78c5a41f52cd70319e957fa8b5a2d4bca4'
+  virtual-host: BPMIDEV001
+  queue_name: GicSIQueue
+  
+publish.rabbitmq:
+  host: rbtmqhieidev01.northwell.edu
+  username: svc_gicsi_user
+  password: '{cipher}0365b87fd7937f815766831fcc97ac78c5a41f52cd70319e957fa8b5a2d4bca4'
+  virtual-host: BPMIDEV001
+  exchange_name: BPMExchange
+  routing_key: StartProcessJsonKey
+  
+process_enrollment:
+  process_id: GapsInCare
+  keymap:    
+    patient_last_name: MemberLastName
+    patient_first_name: MemberFirstName
+    patient_DOB: MemberDOB
+    patient_phone: MemberPhone
+    patient_mpiid: MPIID
+    patient_mrn: MRN
+    patient_mrn_aa: mrnAssigningAuthority
+    services_due: LegendRuleName1
+    insurance_name: InsuranceName
+    member_id: MemberNumber1
+    patient_gender: Sex
+    patient_address: Street
+    patient_city: City
+    patient_state: State
+    patient_zip: Zip
+    patient_language: patient_preferredLanguage
+    patient_email: email
+    pcp_firstName: PCPFirstName
+    pcp_lastName: PCPLastName
+    pcp_phone: PCPPhone
+    pcp_address: PCPAddress2
+    program_identifier: ProgramIdentifier
+    pcp_location_type: SchedulingLocation

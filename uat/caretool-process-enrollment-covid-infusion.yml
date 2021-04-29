@@ -1,0 +1,68 @@
+
+artifact: edu.nshs.mq:process-enrollment-covid-infusion:jar:0.2
+
+server.port: 25001
+
+spring.rabbitmq.listener.simple.prefetch: 30
+
+consume.rabbitmq:
+  host: rbtmqhieidev01.northwell.edu
+  username: kesapp
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMIDEV001
+  queue_name: CovidCaretoolQueue
+  
+publish.rabbitmq:
+  host: rbtmqhieidev01.northwell.edu
+  username: kesapp
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMIDEV001
+  exchange_name: BPMExchange
+  routing_key: StartProcessJsonKey
+  
+process_enrollment:
+  process_id : ListApp_Antibody_Infusion_Process
+  keymap:
+    patient_city : City
+    patient_DOBDateDT : DateOfBirth(MM/dd/yyyy)
+    patient_street : StreetAddressLine1
+    patient_state : State
+    patient_firstName : PatientFirstName
+    patient_middleName : PatientMiddleName
+    patient_lastName : PatientLastName
+    patient_gender : Gender
+    patient_zip : Zip
+    patient_phoneNumber1 : Phone
+    clin_caseIdStrDT: CaseId(str)
+    patient_dPxIDStrDT: Entity.Id
+    patient_preferredLanguage: Entity.Contacts.0.Language
+    patient_MPIID: Entity.Contacts.0.NPI
+    patient_MRN : PatientId
+    patient_mrnAssigningAuthority : SourceFacility
+    req_commentsStrDT : Entity.Triage.Details
+    clin_apptNeededByDateDT: Entity.MCABScreening.AppointmentNeededBy(yyyy-MM-dd'T'HH:mm:ss)
+    clin_onsetDateDT: Entity.MCABScreening.OnsetOfSymptoms(yyyy-MM-dd'T'HH:mm:ss)
+    clin_testDateDT: Entity.MCABScreening.SARSCOV2PCRTestDate(yyyy-MM-dd)
+    clin_testLocationStrDT: Entity.MCABScreening.SARSCOV2PCRTestLocation
+    req_apptTypeStrDT: Entity.Type
+    req_physicianNameStrDT: Entity.FinalizedByFullName
+    req_submitDateDT: Entity.FinalizedWhen(yyyy-MM-dd'T'HH:mm:ss)
+    req_requestorFullNameStrDT: Entity.CreatedByFullName
+    req_visitReasonStrDT: Entity.Triage.Reason
+    clin_patientNeedsMCABScreeningFlag: Entity.MCABScreening.DoesThePatientNeedMCABScreening
+    clin_mcabScreeningSymptomStatusStrDT: Entity.MCABScreening.SymptomStatus
+    clin_mcabScreeeningOxigenRequirementFlag: Entity.MCABScreening.OxygenRequirement
+    clin_mcabScreeningOrigenRequirementAboveLevelFlag: Entity.MCABScreening.OxygenRequirementAboveLevel
+    clin_mcabScreeningZipCodeSSHAreaFlag: Entity.MCABScreening.ZipCodeSSHArea
+    clin_mcabScreeningDoesSymptomsMatchFlag: Entity.MCABScreening.DoesSymptomsMatch
+    clin_mcabScreeningSymptomOnsetLessThan10DaysAgoFlag: Entity.MCABScreening.SymptomOnsetLessThan10DaysAgo
+    clin_mcabScreeningPatientFitsCriteriaFlag: Entity.MCABScreening.DoesPatientFitCriteria
+    clin_mcabScreeningIsAgeLessThan55Flag: Entity.MCABScreening.IsAgeLessThan55
+    clin_mcabScreeningDoesPatientAgeLessThan55HaveConditionsFlag: Entity.MCABScreening.DoesPatientAgeLessThan55HaveConditions
+    clin_mcabScreeningIsAgeBetween12And17Flag: Entity.MCABScreening.IsAgeBetween12And17
+    clin_mcabScreeningDoesPatientAgeBetween12And17HaveConditionsFlag: Entity.MCABScreening.DoesPatientAgeBetween12And17HaveConditions
+    clin_mcabScreeningRecommendationStrDT: Entity.MCABScreening.Recommendation
+    clin_semCaseIdStrDT: SEMCaseId
+    ref_providerEmailStrDT: Entity.MCABScreening.ReferralFromEmail
+    ref_providerPhoneStrDT: Entity.MCABScreening.ReferralFromPhone
+

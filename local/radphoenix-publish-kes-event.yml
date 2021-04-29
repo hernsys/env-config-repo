@@ -1,0 +1,24 @@
+
+artifact: edu.nshs.mq:publish-kes-event:jar:0.1
+
+spring.rabbitmq.listener.simple.prefetch: 30
+
+consume.rabbitmq:
+  host: rbtmqhiedev01.northwell.edu
+  username: svc_aehr_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMDEV001
+  queue_name: RadPhoenixQueue
+  
+publish.rabbitmq:
+  host: rbtmqhiedev01.northwell.edu
+  username: svc_aehr_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMDEV001
+  exchange_name: BPMExchange
+  routing_key: ClinicalEventKey
+
+kes_event:
+  info_type: File
+  event_type: Phoenix-File
+

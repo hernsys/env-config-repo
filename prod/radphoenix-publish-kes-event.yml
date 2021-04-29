@@ -1,0 +1,26 @@
+
+artifact: edu.nshs.mq:publish-kes-event:jar:0.2
+
+spring.rabbitmq.listener.simple.prefetch: 30
+
+server.port: 16005
+
+consume.rabbitmq:
+  host: rbtmqhieprod01.nslijhs.net
+  username: svc_aehr_gastro_user
+  password: '{cipher}adb27e07ae1e5bc0d0e7b17fcc5448ebb83a2a393ccb14fd4e25421cdf6be671'
+  virtual-host: BPMPROD001
+  queue_name: RadPhoenixQueue
+  
+publish.rabbitmq:
+  host: rbtmqhieprod01.nslijhs.net
+  username: svc_aehr_gastro_user
+  password: '{cipher}adb27e07ae1e5bc0d0e7b17fcc5448ebb83a2a393ccb14fd4e25421cdf6be671'
+  virtual-host: BPMPROD001
+  exchange_name: BPMExchange
+  routing_key: ClinicalEventKey
+
+kes_event:
+  info_type: File
+  event_type: Phoenix-File
+

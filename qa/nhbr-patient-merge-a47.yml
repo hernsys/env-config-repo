@@ -1,0 +1,26 @@
+
+artifact: edu.nshs.mq:patient-merge-a47:jar:0.3
+
+spring.rabbitmq.listener.simple.prefetch: 30
+
+server.port: 19003
+
+consume.rabbitmq:
+  host: rbtmqhieqa01.northwell.edu
+  username: svc_bpm_ensemble_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: ENSEMBLEQA001
+  queue_name: PatientMergeA47
+  
+publish.rabbitmq:
+  host: rbtmqhieqa01.northwell.edu
+  username: svc_aehr_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMQA001
+  exchange_name: BPMExchange
+  routing_key: PatientMergeJsonKey
+  
+patient_merge:
+  process_dsl_template: "{\"bool\":{\"must\":[{\"term\":{\"variables.processId\": \"listapp_tdp_nhbr_process\"}},{\"term\":{\"variables.process_status\":\"active\"}},{\"term\":{\"variables.patient_MPIID\": \"XXXOLDMPIIDXXX\"}}]}}"
+  task_mpiid_key: patient_MPIID
+  process_mpiid_key: patient_MPIID

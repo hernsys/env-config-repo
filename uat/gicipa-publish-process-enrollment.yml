@@ -1,0 +1,42 @@
+
+artifact: edu.nshs.mq:publish-process-enrollment:jar:0.2
+
+spring.rabbitmq.listener.simple.prefetch: 30
+
+server.port: 23001
+
+consume.rabbitmq:
+  host: rbtmqhiedev01.northwell.edu
+  username: svc_gicipa_user
+  password: '{cipher}e032f2a417220b7e426fae42a1b666b30d1b9331ef5b16ebe10ee19f2559c925'
+  virtual-host: BPMDEV001
+  queue_name: GicIPAQueue
+  
+publish.rabbitmq:
+  host: rbtmqhiedev01.northwell.edu
+  username: svc_gicipa_user
+  password: '{cipher}e032f2a417220b7e426fae42a1b666b30d1b9331ef5b16ebe10ee19f2559c925'
+  virtual-host: BPMDEV001
+  exchange_name: BPMExchange
+  routing_key: StartProcessJsonKey
+  
+process_enrollment:
+  process_id : ListApp_GIC_IPA
+  keymap:
+    plan_name : patient_insurancePrimaryStrDT
+    file_month : file_MonthStrDT
+    product_code : srvc_productCodeStrDT	
+    file_year : file_yearStrDT	
+    pcp_tin : clin_pcp_tinStrDT
+    pcp_npi_number : clin_pcp_npiStrDT
+    provider_name : clin_pcpNameStrDT
+    member_id : patient_memberNumber1StrDT	
+    patient_last_name : patient_lastName
+    patient_first_name : patient_firstName
+    patient_gender : patient_gender
+    patient_birth_date : patient_DOB
+    town : patient_city
+    patient_zip : patient_zip
+    phone : patient_homePhone
+    services_due : clin_missingServiceStrDT
+    ecosystem : clin_locationStrDT

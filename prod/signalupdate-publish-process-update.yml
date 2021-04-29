@@ -1,0 +1,55 @@
+artifact: edu.nshs.mq:publish-process-update:jar:0.2
+
+spring.rabbitmq.listener.simple.prefetch: 1
+
+server.port: 20005
+
+consume.rabbitmq:
+  host: rbtmqhieprod01.nslijhs.net
+  username: svc_gicipa_user
+  password: '{cipher}adb27e07ae1e5bc0d0e7b17fcc5448ebb83a2a393ccb14fd4e25421cdf6be671'
+  virtual-host: BPMPROD001
+  queue_name: SignalUpdateQueue
+  
+publish.rabbitmq:
+  host: rbtmqhieprod01.nslijhs.net
+  username: svc_gicipa_user
+  password: '{cipher}adb27e07ae1e5bc0d0e7b17fcc5448ebb83a2a393ccb14fd4e25421cdf6be671'
+  virtual-host: BPMPROD001
+  exchange_name: BPMExchange
+  routing_key: SignalEventKey
+
+programs:
+  signalUpdateProgramList:
+    -
+      process_id : ListAppDischargeFollowUp
+      keymap:
+          - mrn
+          - aa
+          - mpiid
+          - lace_score
+          - caretool_flag
+      searchAll: 
+          mrn: variables.processEnrollmentRequest.clinicalData.patientMRN
+          aa: variables.processEnrollmentRequest.clinicalData.patientmrnAssigningAuthority
+      searchOr: 
+          mpiid: variables.processEnrollmentRequest.clinicalData.patientMPIID
+      updates: 
+          lace_score: lace_score
+          caretool_flag: caretoolCaseExists
+      signalName:  UpdateProcessVars
+    -
+      process_id : GapsInCare
+      keymap:
+          - mrn
+          - aa
+          - mpiid
+          - primaryKey
+      searchAll: 
+          mrn: variables.processEnrollmentRequest.clinicalData.MRN
+          aa: variables.processEnrollmentRequest.clinicalData.mrnAssigningAuthority
+      searchOr: 
+          mpiid: variables.processEnrollmentRequest.clinicalData.MPIID
+      updates: 
+          primaryKey: primaryKey
+      signalName:  UpdateProcessVarsSignalGIC    

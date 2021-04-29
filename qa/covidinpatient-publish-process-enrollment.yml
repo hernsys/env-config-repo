@@ -1,0 +1,57 @@
+
+artifact: edu.nshs.mq:publish-process-enrollment:jar:0.2
+
+spring.rabbitmq.listener.simple.prefetch: 30
+
+#6, 7, 8
+server.port: 21007
+
+consume.rabbitmq:
+  host: rbtmqhieqa01.northwell.edu
+  username: svc_aehr_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMQA001
+  queue_name: CovidInpVacQueue
+  
+publish.rabbitmq:
+  host: rbtmqhieqa01.northwell.edu
+  username: svc_aehr_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMQA001
+  exchange_name: BPMExchange
+  routing_key: StartProcessJsonKey
+  
+process_enrollment:
+  process_id : ListApp_COVID19_InPVaccineScheduling_Process
+  keymap:
+    Facility : clin_facilityStrDT
+    EncounterType : clin_encounterTypeStrDT
+    Unit : clin_unitStrDT
+    Location : clin_locationStrDT
+    EncounterNumber : clin_encounterNumberStrDT
+    AdmitDate : clin_admitDateDT
+    DischargeReady : clin_dischargeReady
+    DischargeReady24hr : clin_dischargeReady24h
+    DischargeReady48hr : clin_dischargeReady48h
+    LengthOfStay : clin_lengthStay
+    MRN : patient_MRN
+    EPI : patient_EPI
+    Age : patient_age
+    AgeElligable : patient_ageEligibility
+    DOB : patient_DOBDateDT
+    FullName : patient_fullName
+    FirstName : patient_firstName
+    LastName : patient_lastName
+    Gender : patient_gender
+    Race : patient_race
+    Ethnicity : patient_ethnicity
+    Address : patient_street
+    City : patient_city
+    State : patient_state
+    ZipCode : patient_zip
+    HomePhone : patient_homePhone
+    RiskFlag : patient_riskFlag
+    MedicaidFlag : patient_medicaid
+    PrimaryLanguage : patient_preferredLanguage
+    PatientDIM : patient_DIM
+    VisitDIM : patient_visitDIM

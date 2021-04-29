@@ -1,0 +1,37 @@
+server:
+  port: 8100
+
+  servlet:
+    session:
+      persistent: false
+      timeout: 10ms
+
+spring:
+  session:
+    timeout: 1
+
+management:
+  endpoint:
+    health:
+      enabled: true
+    metrics:
+      enabled: true
+      cache:
+        time-to-live: 0ms
+
+logging:
+  file: log/${spring.application.name:default}.log
+  level:
+    root: WARN
+    org.hibernate: ERROR
+    edu.nshs: DEBUG
+
+endpoints:
+  health:
+    sensitive: false
+  shutdown:
+    enabled: true
+  login:
+    enabled: true
+
+

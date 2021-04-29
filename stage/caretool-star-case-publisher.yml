@@ -1,0 +1,23 @@
+
+artifact: edu.nshs.mq:star-case-publisher:jar:0.2
+
+spring.rabbitmq.listener.simple.prefetch: 30
+
+server.port: 26003
+
+consume.rabbitmq:
+  host: rbtmqhiestage01.nslijhs.net
+  username: svc_aehr_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMSTAGE001
+  queue_name: STAR_ManualCase
+  
+bpm:
+  protocol: http
+  hostName: bpmstagelb01.nslijhs.net
+  port: 8080
+  ensembleProducerEndpoint: ensembleproducer/rest/event
+  userName: svc-bpm-user
+  password: '{cipher}0a7e541a2a560bdeab45f0441500be2eee772cfd23b55d551a9f9e593464ec5f'
+  
+  

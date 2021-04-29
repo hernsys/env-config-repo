@@ -1,0 +1,48 @@
+
+artifact: edu.nshs.mq:publish-process-enrollment:jar:0.2
+
+spring.rabbitmq.listener.simple.prefetch: 30
+
+server.port: 21005
+
+consume.rabbitmq:
+  host: rbtmqhieqa01.northwell.edu
+  username: svc_aehr_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMQA001
+  queue_name: CovidDose2Queue
+  
+publish.rabbitmq:
+  host: rbtmqhieqa01.northwell.edu
+  username: svc_aehr_user
+  password: '{cipher}5a0fe353e0a299101a1149845bd99ef5faa338ae3d4270fa9f0d778e1985c22d'
+  virtual-host: BPMQA001
+  exchange_name: BPMExchange
+  routing_key: StartProcessJsonKey
+  
+process_enrollment:
+  process_id : ListApp_COVID19_VaccineDoseTwo_Process
+  keymap:
+    AppointmentId : clin_appointmentIdStrDT
+    Dose1AdminDate : clin_doseOneAdministeredDateDT
+    Dose1County : clin_doseOneCountyStrDT
+    Dose1Location : clin_doseOneLocationStrDT
+    VaccineManufacturer : clin_vaccineManufacturerStrDT
+    PatientId : patient_id
+    PatientFirstName : patient_firstName
+    PatientLastName : patient_lastName
+    PatientDOB : patient_DOBDateDT
+    PatientLegalGender : patient_gender
+    PatientPhone : patient_homePhone
+    PatientCellularPhone : patient_mobilePhone
+    PatientEmailAddress : patient_email
+    PatientPreferredLanguage : patient_preferredLanguage
+    CreatedDate : clin_createdDateDT
+    PatientFullName : patient_fullName
+    ScheduleType : clin_scheduleTypeStrDT
+    MiscellaneousInfo : clin_miscellaneousInfoStrDT
+    PatientAddress : patient_street
+    PatientCity : patient_city
+    PatientState : patient_state
+    PatientZip : patient_zip
+    IsEmployee : clin_isEmployeeBoolDT
